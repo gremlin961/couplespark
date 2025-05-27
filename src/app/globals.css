@@ -8,45 +8,45 @@ body {
 
 @layer base {
   :root {
-    --background: 33 72% 94%; /* Pale Peach #FAEBD7 */
-    --foreground: 16 25% 29%; /* Dark Brown #5D4037 */
+    --background: 30 100% 98%; /* Warm Off-White (FloralWhite like) */
+    --foreground: 30 10% 20%; /* Dark Warm Grey */
 
-    --card: 33 70% 97%; /* Lighter Peach */
-    --card-foreground: 16 25% 29%; /* Dark Brown */
+    --card: 30 100% 99%; /* Lighter Warm Off-White */
+    --card-foreground: 30 10% 20%; /* Dark Warm Grey */
 
-    --popover: 33 70% 97%; /* Lighter Peach */
-    --popover-foreground: 16 25% 29%; /* Dark Brown */
+    --popover: 30 100% 99%; /* Lighter Warm Off-White */
+    --popover-foreground: 30 10% 20%; /* Dark Warm Grey */
 
-    --primary: 25 76% 50%; /* Muted Rose #D2691E */
-    --primary-foreground: 0 0% 98%; /* Near White */
+    --primary: 10 90% 60%; /* Bright Coral */
+    --primary-foreground: 30 100% 98%; /* Warm Off-White (for text on primary) */
 
-    --secondary: 0 82% 85%; /* Lighter Soft Coral */
-    --secondary-foreground: 16 25% 29%; /* Dark Brown */
+    --secondary: 175 70% 70%; /* Light Teal */
+    --secondary-foreground: 175 30% 25%; /* Dark Teal */
 
-    --muted: 33 60% 88%; /* Desaturated Pale Peach */
-    --muted-foreground: 16 25% 40%; /* Slightly lighter Dark Brown */
+    --muted: 30 50% 94%; /* Desaturated Warm Off-White */
+    --muted-foreground: 30 10% 40%; /* Medium Warm Grey */
 
-    --accent: 0 82% 75%; /* Soft Coral #F08080 */
-    --accent-foreground: 16 25% 29%; /* Dark Brown */
+    --accent: 50 100% 60%; /* Sunny Yellow */
+    --accent-foreground: 30 10% 20%; /* Dark Warm Grey (for text on accent) */
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%; /* Standard Red */
+    --destructive-foreground: 0 0% 98%; /* Near White */
 
-    --border: 33 50% 85%; /* Slightly darker/desaturated Pale Peach */
-    --input: 33 50% 90%; /* Slightly darker/desaturated Pale Peach for input backgrounds */
-    --ring: 0 82% 75%; /* Soft Coral */
+    --border: 30 60% 90%; /* Light Greyish Warm Off-White */
+    --input: 30 60% 92%; /* Slightly Lighter Greyish Warm Off-White for input backgrounds */
+    --ring: 50 100% 60%; /* Sunny Yellow (for focus rings) */
 
     --radius: 0.5rem;
 
-    /* Sidebar specific colors - retain existing structure but can be harmonized if sidebar is used */
-    --sidebar-background: 240 5.9% 10%; /* Default dark */
-    --sidebar-foreground: 240 4.8% 95.9%; /* Default dark */
-    --sidebar-primary: 224.3 76.3% 48%; /* Default dark */
-    --sidebar-primary-foreground: 0 0% 100%; /* Default dark */
-    --sidebar-accent: 240 3.7% 15.9%; /* Default dark */
-    --sidebar-accent-foreground: 240 4.8% 95.9%; /* Default dark */
-    --sidebar-border: 240 3.7% 15.9%; /* Default dark */
-    --sidebar-ring: 217.2 91.2% 59.8%; /* Default dark */
+    /* Sidebar specific colors - retain existing structure */
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
 
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
@@ -56,33 +56,33 @@ body {
   }
 
   .dark {
-    --background: 16 25% 15%; /* Darker Brown for dark mode background */
-    --foreground: 33 72% 90%; /* Lighter Peach for dark mode text */
+    --background: 220 20% 15%; /* Dark Desaturated Blue */
+    --foreground: 30 100% 90%; /* Light Warm Off-White */
 
-    --card: 16 25% 20%; /* Dark Brown for dark mode cards */
-    --card-foreground: 33 72% 90%; /* Lighter Peach for dark mode card text */
+    --card: 220 20% 20%; /* Slightly Lighter Dark Desaturated Blue */
+    --card-foreground: 30 100% 90%; /* Light Warm Off-White */
 
-    --popover: 16 25% 20%;
-    --popover-foreground: 33 72% 90%;
+    --popover: 220 20% 20%;
+    --popover-foreground: 30 100% 90%;
 
-    --primary: 25 76% 60%; /* Slightly lighter Muted Rose for dark mode */
-    --primary-foreground: 0 0% 98%;
+    --primary: 10 85% 65%; /* Bright Coral (Dark Mode) */
+    --primary-foreground: 10 30% 15%; /* Very Dark Coral */
 
-    --secondary: 0 82% 65%; /* Slightly lighter Soft Coral for dark mode */
-    --secondary-foreground: 16 25% 15%;
+    --secondary: 175 60% 60%; /* Light Teal (Dark Mode) */
+    --secondary-foreground: 175 30% 15%; /* Dark Teal (Dark Mode) */
 
-    --muted: 16 25% 25%;
-    --muted-foreground: 33 72% 70%;
+    --muted: 220 20% 25%; /* Medium Dark Desaturated Blue */
+    --muted-foreground: 30 100% 70%; /* Medium Light Warm Off-White */
 
-    --accent: 0 82% 65%; /* Slightly lighter Soft Coral for dark mode */
-    --accent-foreground: 16 25% 15%;
+    --accent: 50 90% 65%; /* Sunny Yellow (Dark Mode) */
+    --accent-foreground: 50 30% 15%; /* Dark Yellow/Brown */
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 70% 50%; /* Slightly less intense red for dark */
     --destructive-foreground: 0 0% 98%;
 
-    --border: 16 25% 30%;
-    --input: 16 25% 30%;
-    --ring: 0 82% 65%; /* Lighter Soft Coral for dark mode rings */
+    --border: 220 20% 30%; /* Darker Border */
+    --input: 220 20% 30%; /* Darker Input Background */
+    --ring: 50 90% 65%; /* Sunny Yellow (Dark Mode for rings) */
 
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
