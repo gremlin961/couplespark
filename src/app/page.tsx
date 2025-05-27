@@ -1,9 +1,10 @@
+
 "use client";
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ThumbsUp, ThumbsDown, Flame, MessageCircleQuestion, RotateCw } from 'lucide-react'; // Changed Sparkles to Flame
+import { ThumbsUp, ThumbsDown, Flame, MessageCircleQuestion, RotateCw } from 'lucide-react';
 import { generateNextQuestion, type GenerateNextQuestionInput } from '@/ai/flows/generate-question';
 import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from '@/components/ui/skeleton';
@@ -14,8 +15,13 @@ export default function CoupleSparkPage() {
   const [feedback, setFeedback] = useState<string | undefined>(undefined);
   const [error, setError] = useState<string | null>(null);
   const [animationKey, setAnimationKey] = useState<number>(0); // For re-triggering animation
+  const [currentYear, setCurrentYear] = useState<number | null>(null);
 
   const { toast } = useToast();
+
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
 
   const fetchQuestion = useCallback(async (currentFeedback?: string) => {
     setIsLoading(true);
@@ -77,7 +83,7 @@ export default function CoupleSparkPage() {
     <div className="flex flex-col items-center justify-center min-h-screen p-4 sm:p-6 md:p-8 bg-background text-foreground">
       <header className="mb-8 text-center">
         <h1 className="text-5xl font-bold text-primary flex items-center justify-center">
-          <Flame className="w-12 h-12 mr-3 text-accent" /> {/* Changed Sparkles to Flame */}
+          <Flame className="w-12 h-12 mr-3 text-accent" />
           CoupleSpark
         </h1>
         <p className="text-muted-foreground mt-2 text-lg">Ignite deeper connections, one question at a time.</p>
@@ -145,7 +151,11 @@ export default function CoupleSparkPage() {
       </main>
       
       <footer className="mt-12 text-center text-muted-foreground text-sm">
-        <p>&copy; {new Date().getFullYear()} CoupleSpark. Designed to bring you closer.</p>
+        {currentYear !== null ? (
+          <p>&copy; {currentYear} CoupleSpark. Designed to bring you closer.</p>
+        ) : (
+          <p>Loading year...</p> 
+        )}
       </footer>
     </div>
   );
