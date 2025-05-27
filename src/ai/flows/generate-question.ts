@@ -1,3 +1,4 @@
+
 'use server';
 /**
  * @fileOverview Generates engaging questions for couples.
@@ -33,12 +34,15 @@ const prompt = ai.definePrompt({
   name: 'generateNextQuestionPrompt',
   input: {schema: GenerateNextQuestionInputSchema},
   output: {schema: GenerateNextQuestionOutputSchema},
-  prompt: `You are an AI assistant designed to generate thoughtful and engaging one-sentence questions for couples.
+  prompt: `You are an AI assistant designed to generate thoughtful, engaging, and SIMPLE one-sentence questions for couples.
+  The questions should be direct and easy to understand. Avoid complex phrasing or multiple clauses.
+
+  For example, instead of: "If you could relive one shared memory with the ability to fully immerse yourselves in it again, which would you choose and why does that moment still resonate so deeply?"
+  A better, simpler question is: "If you could relive one shared memory together, which would you choose?"
 
   Consider the following feedback on previous questions, if any: {{{feedback}}}
 
-  Generate a new question that is likely to spark meaningful conversation.
-  The question should not be generic, but specific and engaging.
+  Generate a new, simple question that is likely to spark meaningful conversation.
   The question should only be one sentence long.
 
   Output:
