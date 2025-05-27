@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ThumbsUp, ThumbsDown, Sparkles, MessageCircleQuestion, RotateCw } from 'lucide-react';
+import { ThumbsUp, ThumbsDown, Flame, MessageCircleQuestion, RotateCw } from 'lucide-react'; // Changed Sparkles to Flame
 import { generateNextQuestion, type GenerateNextQuestionInput } from '@/ai/flows/generate-question';
 import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from '@/components/ui/skeleton';
@@ -77,7 +77,7 @@ export default function CoupleSparkPage() {
     <div className="flex flex-col items-center justify-center min-h-screen p-4 sm:p-6 md:p-8 bg-background text-foreground">
       <header className="mb-8 text-center">
         <h1 className="text-5xl font-bold text-primary flex items-center justify-center">
-          <Sparkles className="w-12 h-12 mr-3 text-accent" />
+          <Flame className="w-12 h-12 mr-3 text-accent" /> {/* Changed Sparkles to Flame */}
           CoupleSpark
         </h1>
         <p className="text-muted-foreground mt-2 text-lg">Ignite deeper connections, one question at a time.</p>
