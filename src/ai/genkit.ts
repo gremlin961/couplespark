@@ -1,17 +1,16 @@
-import {genkit} from 'genkit';
-import {googleAI} from '@genkit-ai/googleai';
-import {getGoogleApiKey} from '@/lib/secrets'; // Import the new function
 
-// Fetch the API key from Secret Manager.
-// Note: This top-level await makes this module an async module.
-// Modules importing 'ai' will implicitly wait for this to complete.
-const apiKey = await getGoogleApiKey();
+'use server';
+import {genkit} from 'genkit';
+import {vertexAI} from '@genkit-ai/vertexai'; // Import the Vertex AI plugin
 
 export const ai = genkit({
   plugins: [
-    googleAI({
-      apiKey: apiKey, // Use the fetched API key
+    vertexAI({
+      project: 'rkiles-demo-host-vpc', // Your Google Cloud project ID
+      location: 'us-central1', // Specify your Vertex AI location, e.g., 'us-central1'
     }),
   ],
-  model: 'googleai/gemini-2.0-flash',
+  model: 'vertexai/gemini-1.5-flash-001', // Default model for Vertex AI
+  // You can remove the explicit 'model' line here if you prefer to set it in each flow,
+  // or ensure this default model is available in your Vertex AI project and location.
 });
