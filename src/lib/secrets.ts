@@ -4,6 +4,8 @@
  * @fileOverview Helper functions for interacting with GCP Secret Manager.
  *
  * - getGoogleApiKey - Fetches the Google API Key from Secret Manager.
+ *   This function relies on the GCP_PROJECT_ID, GOOGLE_API_KEY_SECRET_ID,
+ *   and GOOGLE_API_KEY_SECRET_VERSION environment variables.
  */
 import {SecretManagerServiceClient} from '@google-cloud/secret-manager';
 
@@ -11,27 +13,37 @@ const client = new SecretManagerServiceClient();
 
 /**
  * Fetches the Google API Key from GCP Secret Manager.
- * You need to set YOUR_GCP_PROJECT_ID and GOOGLE_API_KEY_SECRET_ID.
- * The version is typically 'latest'.
  *
- * Ensure the service account running this code has the "Secret Manager Secret Accessor" IAM role.
+ * Relies on the following environment variables:
+ * - GCP_PROJECT_ID: Your Google Cloud Project ID (Required).
+ * - GOOGLE_API_KEY_SECRET_ID: The ID of the secret in Secret Manager containing the API key (Defaults to 'GOOGLE_API_KEY').
+ * - GOOGLE_API_KEY_SECRET_VERSION: The version of the secret (Defaults to 'latest').
+ *
+ * Ensure the service account running this code has the "Secret Manager Secret Accessor" IAM role
+ * for the specified secret.
  */
 export async function getGoogleApiKey(): Promise<string> {
-  // IMPORTANT: Replace these placeholders with your actual GCP Project ID and Secret ID.
-  const GCP_PROJECT_ID = 'YOUR_GCP_PROJECT_ID';
-  const GOOGLE_API_KEY_SECRET_ID = 'GOOGLE_API_KEY'; // This is the ID of the secret you create in Secret Manager
-  const SECRET_VERSION = 'latest';
+  const GCP_PROJECT_ID = process.env.GCP_PROJECT_ID;
+  const GOOGLE_API_KEY_SECRET_ID = process.env.GOOGLE_API_KEY_SECRET_ID || 'GOOGLE_API_KEY';
+  const SECRET_VERSION = process.env.GOOGLE_API_KEY_SECRET_VERSION || 'latest';
 
-  if (GCP_PROJECT_ID === 'YOUR_GCP_PROJECT_ID' || GOOGLE_API_KEY_SECRET_ID === 'GOOGLE_API_KEY') {
-    console.warn(
-      'GCP Project ID or Secret ID for Google API Key is not configured in src/lib/secrets.ts. ' +
-      'Genkit might not initialize correctly if the API key is not found elsewhere (e.g., environment variables for other plugins).'
+  if (!GCP_PROJECT_ID) {
+    const errorMessage = 'GCP_PROJECT_ID environment variable is not set. This is required to fetch secrets from Secret Manager.';
+    console.error(errorMessage);
+    throw new Error(errorMessage);
+  }
+
+  // Log info about which secret ID and version are being used if they are defaults
+  if (GOOGLE_API_KEY_SECRET_ID === 'GOOGLE_API_KEY' && !process.env.GOOGLE_API_KEY_SECRET_ID) {
+    console.info(
+      "Using default secret ID 'GOOGLE_API_KEY' for the API key. " +
+      "Set the GOOGLE_API_KEY_SECRET_ID environment variable to use a different secret ID."
     );
-    // Return a dummy key or throw an error if you want to enforce it's set
-    // For now, we'll let Genkit's googleAI plugin try to find it via its default mechanisms if this fails.
-    // However, if this function is explicitly called, it implies the key *should* come from Secret Manager.
-    throw new Error(
-      'Please configure GCP_PROJECT_ID and GOOGLE_API_KEY_SECRET_ID in src/lib/secrets.ts'
+  }
+  if (SECRET_VERSION === 'latest' && !process.env.GOOGLE_API_KEY_SECRET_VERSION) {
+    console.info(
+      "Using default secret version 'latest' for the API key. " +
+      "Set the GOOGLE_API_KEY_SECRET_VERSION environment variable to use a different version."
     );
   }
 
@@ -49,7 +61,7 @@ export async function getGoogleApiKey(): Promise<string> {
   } catch (error) {
     console.error(`Failed to fetch secret ${secretName}:`, error);
     throw new Error(
-      `Could not fetch Google API Key from Secret Manager. Ensure the secret exists, and the service account has the 'Secret Manager Secret Accessor' role. Original error: ${error instanceof Error ? error.message : String(error)}`
+      `Could not fetch Google API Key from Secret Manager (secret: ${secretName}). Ensure the secret exists, the GCP_PROJECT_ID is correct, and the service account has the 'Secret Manager Secret Accessor' role. Original error: ${error instanceof Error ? error.message : String(error)}`
     );
   }
 }
