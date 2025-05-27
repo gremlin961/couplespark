@@ -1,5 +1,4 @@
 
-'use server';
 import {genkit} from 'genkit';
 import {vertexAI} from '@genkit-ai/vertexai'; // Import the Vertex AI plugin
 
